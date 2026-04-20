@@ -6,7 +6,7 @@
   <title>Jonathan Johnson — Engineering Leader</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     /* Catppuccin Latte */
     :root {
@@ -26,10 +26,10 @@
       --teal:      #179299;
       --green:     #40a02b;
       --peach:     #fe640b;
+      --pink:      #ea76cb;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -38,89 +38,145 @@
       color: var(--text);
       line-height: 1.6;
       font-size: 16px;
+      overflow-x: hidden;
     }
 
-    a { color: var(--blue); text-decoration: none; }
+    a { color: var(--blue); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--lavender); }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      position: sticky;
-      top: 0;
-      background: var(--mantle);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(239, 241, 245, 0.85);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--crust);
       z-index: 100;
-      padding: 0 2rem;
+      padding: 0 3rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 56px;
+      height: 60px;
     }
 
-    nav .logo {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--text);
-      letter-spacing: 0.01em;
+    .nav-logo {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      color: var(--blue);
+      letter-spacing: 0.02em;
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
     }
 
     nav ul a {
       font-size: 0.875rem;
       font-weight: 500;
       color: var(--subtext1);
-      transition: color 0.15s;
+      transition: color 0.2s;
     }
 
     nav ul a:hover { color: var(--blue); }
 
-    /* SECTIONS */
-    section {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
+    /* ── SCROLL FADE-IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    section + section {
-      border-top: 1px solid var(--crust);
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* HERO */
+    /* ── HERO ── */
     #hero {
-      padding-top: 7rem;
-      padding-bottom: 5rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 3rem 4rem;
+      gap: 4rem;
     }
 
-    #hero .eyebrow {
+    .hero-left { flex: 1; }
+
+    .hero-tag {
+      display: inline-block;
       font-size: 0.8rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--lavender);
-      margin-bottom: 1rem;
+      background: rgba(114, 135, 253, 0.1);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
     }
 
     #hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 600;
-      line-height: 1.15;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
       color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    #hero h1 span {
+      background: linear-gradient(135deg, var(--blue), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--sapphire);
       margin-bottom: 1.25rem;
     }
 
-    #hero .tagline {
-      font-size: 1.1rem;
+    .hero-bio {
+      font-size: 1rem;
       color: var(--subtext0);
-      max-width: 520px;
+      max-width: 480px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 0.75rem;
       margin-bottom: 2rem;
     }
 
-    .cta-group {
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1.5px solid var(--surface0);
+      background: var(--mantle);
+      color: var(--text);
+    }
+
+    .social-icon:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(30, 102, 245, 0.15);
+      color: var(--blue);
+      border-color: var(--lavender);
+    }
+
+    .hero-cta {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
@@ -128,47 +184,133 @@
 
     .btn {
       display: inline-block;
-      padding: 0.6rem 1.4rem;
-      border-radius: 6px;
+      padding: 0.65rem 1.6rem;
+      border-radius: 8px;
       font-size: 0.875rem;
-      font-weight: 500;
-      transition: opacity 0.15s;
+      font-weight: 600;
+      transition: all 0.2s;
+      cursor: pointer;
     }
 
-    .btn:hover { opacity: 0.85; color: inherit; }
-
     .btn-primary {
-      background: var(--blue);
+      background: linear-gradient(135deg, var(--blue), var(--lavender));
       color: #fff;
+      box-shadow: 0 4px 12px rgba(30, 102, 245, 0.3);
+    }
+
+    .btn-primary:hover {
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 102, 245, 0.4);
     }
 
     .btn-secondary {
-      background: var(--surface0);
+      background: var(--mantle);
       color: var(--text);
+      border: 1.5px solid var(--surface0);
     }
 
-    /* SECTION HEADINGS */
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--lavender);
-      margin-bottom: 2.5rem;
+    .btn-secondary:hover {
+      color: var(--blue);
+      border-color: var(--lavender);
+      transform: translateY(-2px);
     }
 
-    /* EXPERIENCE */
-    .experience-list {
+    /* HERO AVATAR */
+    .hero-right {
+      flex-shrink: 0;
+    }
+
+    .avatar-wrap {
+      width: 320px;
+      height: 380px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, var(--mantle), var(--crust));
+      border: 2px solid var(--surface0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(76, 79, 105, 0.12);
+    }
+
+    /* Replace this div with an <img> tag when you have a photo */
+    .avatar-initials {
+      font-size: 6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--blue), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      user-select: none;
+    }
+
+    .avatar-wrap::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(114, 135, 253, 0.08);
+    }
+
+    .avatar-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; left: -30px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(30, 102, 245, 0.07);
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+      border-top: 1px solid var(--crust);
+    }
+
+    .section-heading {
+      text-align: center;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3.5rem;
+    }
+
+    .section-heading span {
+      background: linear-gradient(135deg, var(--blue), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── EXPERIENCE CARDS ── */
+    .exp-list {
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      gap: 1.5rem;
     }
 
-    .exp-item {}
+    .exp-card {
+      background: var(--mantle);
+      border: 1.5px solid var(--crust);
+      border-left: 4px solid var(--lavender);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
 
-    .exp-header {
+    .exp-card:hover {
+      box-shadow: 0 8px 32px rgba(76, 79, 105, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .exp-card-header {
       display: flex;
-      align-items: baseline;
+      align-items: flex-start;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 0.5rem;
@@ -176,21 +318,26 @@
     }
 
     .exp-company {
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 1.05rem;
+      font-weight: 700;
       color: var(--text);
     }
 
     .exp-period {
       font-size: 0.8rem;
+      font-weight: 500;
       color: var(--overlay0);
+      background: var(--surface0);
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+      white-space: nowrap;
     }
 
-    .exp-title {
+    .exp-role {
       font-size: 0.875rem;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--sapphire);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
 
     .exp-bullets {
@@ -203,66 +350,101 @@
     .exp-bullets li {
       font-size: 0.9rem;
       color: var(--subtext1);
-      padding-left: 1.1rem;
+      padding-left: 1.25rem;
       position: relative;
+      line-height: 1.55;
     }
 
     .exp-bullets li::before {
-      content: '·';
+      content: '▸';
       position: absolute;
       left: 0;
       color: var(--lavender);
-      font-weight: 700;
+      font-size: 0.75rem;
+      top: 0.2rem;
     }
 
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem;
+    /* ── SKILLS ── */
+    .skills-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
     }
 
-    .skill-group h3 {
+    .skill-category h3 {
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--mauve);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.9rem;
     }
 
-    .skill-group ul {
-      list-style: none;
+    .skill-pills {
       display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
-    .skill-group ul li {
-      font-size: 0.875rem;
-      color: var(--subtext1);
-    }
-
-    /* CONTACT */
-    #contact p {
-      color: var(--subtext0);
-      margin-bottom: 1.5rem;
-      max-width: 480px;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .contact-links a {
-      font-size: 0.9rem;
+    .pill {
+      font-size: 0.825rem;
       font-weight: 500;
-      color: var(--blue);
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      border: 1.5px solid var(--surface0);
+      background: var(--mantle);
+      color: var(--subtext1);
+      transition: all 0.2s;
     }
 
-    /* FOOTER */
+    .pill:hover {
+      border-color: var(--lavender);
+      color: var(--blue);
+      background: rgba(114, 135, 253, 0.08);
+    }
+
+    /* ── CONTACT ── */
+    #contact .section-wrap {
+      text-align: center;
+    }
+
+    .contact-tagline {
+      font-size: 1rem;
+      color: var(--subtext0);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .contact-cards {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 10px;
+      background: var(--mantle);
+      border: 1.5px solid var(--crust);
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .contact-card:hover {
+      border-color: var(--lavender);
+      color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 102, 245, 0.12);
+    }
+
+    /* ── FOOTER ── */
     footer {
       text-align: center;
       padding: 2rem;
@@ -270,12 +452,29 @@
       color: var(--overlay0);
       border-top: 1px solid var(--crust);
     }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      #hero {
+        flex-direction: column-reverse;
+        padding: 100px 1.5rem 4rem;
+        text-align: center;
+        gap: 2.5rem;
+      }
+      .hero-bio { margin: 0 auto 2rem; }
+      .social-icons { justify-content: center; }
+      .hero-cta { justify-content: center; }
+      .avatar-wrap { width: 220px; height: 260px; }
+      .section-wrap { padding: 4rem 1.5rem; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
-    <span class="logo">Jonathan Johnson</span>
+    <span class="nav-logo">&lt; Jonathan Johnson /&gt;</span>
     <ul>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -283,149 +482,183 @@
     </ul>
   </nav>
 
+  <!-- HERO -->
   <section id="hero">
-    <p class="eyebrow">Engineering Leader</p>
-    <h1>Building high-performing teams and AI-first infrastructure.</h1>
-    <p class="tagline">20 years leading engineering at scale — from consulting to streaming to the frontier of AI tooling. Based in Durham, NC.</p>
-    <div class="cta-group">
-      <a href="#contact" class="btn btn-primary">Get in touch</a>
-      <a href="#experience" class="btn btn-secondary">View experience</a>
+    <div class="hero-left fade-in">
+      <span class="hero-tag">Engineering Leader</span>
+      <h1>Jonathan <span>Johnson</span></h1>
+      <p class="hero-subtitle">Building teams that build the future.</p>
+      <p class="hero-bio">20 years leading engineering at scale — from consulting to streaming infrastructure to AI-first developer tooling. Based in Durham, NC.</p>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/jonathan-david-johnson" target="_blank" rel="noopener" class="social-icon" title="LinkedIn">in</a>
+        <a href="https://github.com/jonathan-david-johnson" target="_blank" rel="noopener" class="social-icon" title="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        </a>
+      </div>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+        <a href="#experience" class="btn btn-secondary">View experience</a>
+      </div>
     </div>
-  </section>
-
-  <section id="experience">
-    <p class="section-label">Experience</p>
-    <div class="experience-list">
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-company">The Walt Disney Company</span>
-          <span class="exp-period">2024 – 2026</span>
-        </div>
-        <p class="exp-title">Engineering Manager — Morrisville, NC</p>
-        <ul class="exp-bullets">
-          <li>Built a suite of internal MCP servers connecting Claude to 30+ production and QA databases, Jira, Confluence, AWS infrastructure, and a DevTools-based site crawler — enabling natural-language access across the full system.</li>
-          <li>Designed a meta-repo framework unifying 30+ microservice repositories: cross-repo branch management, synchronized PRs, service orchestration, and consistent AI-assisted development without a monorepo.</li>
-          <li>Pioneered AI adoption across the organization; led hands-on workshops and architected a documentation federation strategy to enable agentic traversal and reduce incident RTO.</li>
-          <li>Brought in after full-team attrition to stabilize mission-critical live event streaming provisioning for ESPN, Hulu, and Disney+ — 30,000+ events per year, 24/7.</li>
-          <li>Modernized platform while rebuilding team: NextJS frontends, AWS Aurora Global with Route53 ARC failover, Java backend upgrades.</li>
-          <li>Delivered ESPN on Disney+ and ESPN Flagship on schedule during full platform modernization.</li>
-        </ul>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-company">WillowTree</span>
-          <span class="exp-period">2021 – 2024</span>
-        </div>
-        <p class="exp-title">Senior Engineering Manager — Durham, NC</p>
-        <ul class="exp-bullets">
-          <li>Led engineering delivery for TELUS Digital's AI training data platform — a 16+ microservice system (Python/FastAPI, React/TypeScript, RabbitMQ, MongoDB/PostgreSQL) serving 1.2 million global annotators producing training data for frontier AI labs.</li>
-          <li>Led technical delivery across 5 teams, 4 engineering managers, and 50 developers and QA engineers spanning mobile, web, backend, cloud, and CI/CD.</li>
-          <li>Partnered with clients including TELUS, Edward Jones, and Fox Media on strategic planning, delivery roadmaps, and handover.</li>
-          <li>Hired 10+ engineers across multiple teams.</li>
-        </ul>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-company">One Cow Standing</span>
-          <span class="exp-period">2008 – 2021</span>
-        </div>
-        <p class="exp-title">Lead Developer — Durham, NC</p>
-        <ul class="exp-bullets">
-          <li>Delivered 10+ projects on time and on budget as sole technical lead across DB, BE, FE, cloud, CI/CD, and test suite.</li>
-          <li>Managed client relationships from discovery through delivery and handover.</li>
-          <li>Hired, onboarded, and mentored junior developers.</li>
-        </ul>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-company">Motricity</span>
-          <span class="exp-period">2005 – 2008</span>
-        </div>
-        <p class="exp-title">Software Developer — Durham, NC</p>
-        <ul class="exp-bullets">
-          <li>Built e-commerce mobile sites using WAP and J2EE in the pre-smartphone era.</li>
-          <li>Led delivery of a Ruby on Rails mobile site for BET (Black Entertainment Television).</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="skills">
-    <p class="section-label">Skills &amp; Tools</p>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h3>Languages</h3>
-        <ul>
-          <li>TypeScript / JavaScript</li>
-          <li>Java / Kotlin</li>
-          <li>Python</li>
-          <li>SQL / NoSQL</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Frontend</h3>
-        <ul>
-          <li>NextJS / React</li>
-          <li>React Native</li>
-          <li>Node</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Cloud &amp; Infra</h3>
-        <ul>
-          <li>AWS</li>
-          <li>GitHub Actions</li>
-          <li>Docker</li>
-          <li>Azure</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>AI &amp; Tooling</h3>
-        <ul>
-          <li>MCP Server Development</li>
-          <li>Agentic Systems</li>
-          <li>Claude Code / Kiro</li>
-          <li>Cursor / NeoVim</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Leadership</h3>
-        <ul>
-          <li>SAFe / Agile / Kanban</li>
-          <li>Crucial Conversations</li>
-          <li>Software Estimation</li>
-          <li>Hiring &amp; Mentorship</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Education</h3>
-        <ul>
-          <li>MS Computer Science</li>
-          <li>Clemson University</li>
-          <li>Harvard: Disruptive Strategy</li>
-        </ul>
+    <div class="hero-right fade-in" style="transition-delay: 0.15s">
+      <div class="avatar-wrap">
+        <img src="headshot.png" alt="Jonathan Johnson" style="width:100%;height:100%;object-fit:cover;" />
       </div>
     </div>
   </section>
 
-  <section id="contact">
-    <p class="section-label">Contact</p>
-    <p>I'm currently exploring new opportunities in engineering leadership, particularly in streaming, AI infrastructure, and platform engineering.</p>
-    <div class="contact-links">
-      <a href="mailto:JonathanDavidJohnson@protonmail.com">JonathanDavidJohnson@protonmail.com</a>
-      <a href="tel:9198183989">919-818-3989</a>
-      <a href="https://www.linkedin.com/in/jonathan-david-johnson" target="_blank" rel="noopener">LinkedIn</a>
+  <!-- EXPERIENCE -->
+  <div id="experience">
+    <div class="section-wrap">
+      <h2 class="section-heading fade-in">My <span>Experience</span></h2>
+      <div class="exp-list">
+
+        <div class="exp-card fade-in">
+          <div class="exp-card-header">
+            <span class="exp-company">The Walt Disney Company</span>
+            <span class="exp-period">2024 – 2026</span>
+          </div>
+          <p class="exp-role">Engineering Manager · Morrisville, NC</p>
+          <ul class="exp-bullets">
+            <li>Built a suite of internal MCP servers connecting Claude to 30+ production and QA databases, Jira, Confluence, AWS infrastructure, and a DevTools-based site crawler — enabling natural-language access across the full engineering stack.</li>
+            <li>Designed a meta-repo framework unifying 30+ microservice repositories: cross-repo branch management, synchronized PRs, service orchestration, and consistent AI-assisted development without a monorepo.</li>
+            <li>Pioneered AI adoption across the organization; led hands-on workshops and architected a documentation federation strategy to enable agentic traversal and reduce incident RTO.</li>
+            <li>Brought in after full-team attrition to stabilize mission-critical live event streaming provisioning for ESPN, Hulu, and Disney+ — 30,000+ events per year, 24/7.</li>
+            <li>Modernized platform while rebuilding team: NextJS frontends, AWS Aurora Global with Route53 ARC failover, Java backend upgrades.</li>
+            <li>Delivered ESPN on Disney+ and ESPN Flagship on schedule during full platform modernization.</li>
+          </ul>
+        </div>
+
+        <div class="exp-card fade-in" style="border-left-color: var(--sapphire)">
+          <div class="exp-card-header">
+            <span class="exp-company">WillowTree</span>
+            <span class="exp-period">2021 – 2024</span>
+          </div>
+          <p class="exp-role">Senior Engineering Manager · Durham, NC</p>
+          <ul class="exp-bullets">
+            <li>Led engineering delivery for TELUS Digital's AI training data platform — a 16+ microservice system (Python/FastAPI, React/TypeScript, RabbitMQ, MongoDB/PostgreSQL) serving 1.2 million global annotators producing training data for frontier AI labs.</li>
+            <li>Led technical delivery across 5 teams, 4 engineering managers, and 50 developers and QA engineers spanning mobile, web, backend, cloud, and CI/CD.</li>
+            <li>Partnered with clients including TELUS, Edward Jones, and Fox Media on strategic planning, delivery roadmaps, and handover.</li>
+            <li>Hired 10+ engineers across multiple teams.</li>
+          </ul>
+        </div>
+
+        <div class="exp-card fade-in" style="border-left-color: var(--teal)">
+          <div class="exp-card-header">
+            <span class="exp-company">One Cow Standing</span>
+            <span class="exp-period">2008 – 2021</span>
+          </div>
+          <p class="exp-role">Lead Developer · Durham, NC</p>
+          <ul class="exp-bullets">
+            <li>Delivered 10+ projects on time and on budget as sole technical lead across DB, BE, FE, cloud, CI/CD, and test suite.</li>
+            <li>Managed client relationships from discovery through delivery and handover.</li>
+            <li>Hired, onboarded, and mentored junior developers.</li>
+          </ul>
+        </div>
+
+        <div class="exp-card fade-in" style="border-left-color: var(--peach)">
+          <div class="exp-card-header">
+            <span class="exp-company">Motricity</span>
+            <span class="exp-period">2005 – 2008</span>
+          </div>
+          <p class="exp-role">Software Developer · Durham, NC</p>
+          <ul class="exp-bullets">
+            <li>Built e-commerce mobile sites using WAP and J2EE in the pre-smartphone era.</li>
+            <li>Led delivery of a Ruby on Rails mobile site for BET (Black Entertainment Television).</li>
+          </ul>
+        </div>
+
+      </div>
     </div>
-  </section>
+  </div>
+
+  <!-- SKILLS -->
+  <div id="skills">
+    <div class="section-wrap">
+      <h2 class="section-heading fade-in">Skills &amp; <span>Tools</span></h2>
+      <div class="skills-section">
+
+        <div class="skill-category fade-in">
+          <h3>AI &amp; Agentic Systems</h3>
+          <div class="skill-pills">
+            <span class="pill">MCP Server Development</span>
+            <span class="pill">Agentic Workflows</span>
+            <span class="pill">Claude Code / Kiro</span>
+            <span class="pill">AI-First Development</span>
+            <span class="pill">Documentation Federation</span>
+            <span class="pill">Cursor / NeoVim</span>
+          </div>
+        </div>
+
+        <div class="skill-category fade-in">
+          <h3>Languages &amp; Frameworks</h3>
+          <div class="skill-pills">
+            <span class="pill">TypeScript / JavaScript</span>
+            <span class="pill">Java / Kotlin</span>
+            <span class="pill">Python</span>
+            <span class="pill">NextJS / React</span>
+            <span class="pill">React Native</span>
+            <span class="pill">Node</span>
+            <span class="pill">SQL / NoSQL</span>
+          </div>
+        </div>
+
+        <div class="skill-category fade-in">
+          <h3>Cloud &amp; Infrastructure</h3>
+          <div class="skill-pills">
+            <span class="pill">AWS</span>
+            <span class="pill">Aurora Global</span>
+            <span class="pill">Route53 ARC</span>
+            <span class="pill">GitHub Actions</span>
+            <span class="pill">Docker</span>
+            <span class="pill">Azure</span>
+            <span class="pill">RabbitMQ</span>
+          </div>
+        </div>
+
+        <div class="skill-category fade-in">
+          <h3>Leadership &amp; Process</h3>
+          <div class="skill-pills">
+            <span class="pill">SAFe / Agile / Kanban</span>
+            <span class="pill">Hiring &amp; Mentorship</span>
+            <span class="pill">Crucial Conversations</span>
+            <span class="pill">Software Estimation</span>
+            <span class="pill">Cross-functional Partnerships</span>
+            <span class="pill">Stakeholder Communication</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact">
+    <div class="section-wrap" style="text-align:center">
+      <h2 class="section-heading fade-in">Get in <span>Touch</span></h2>
+      <p class="contact-tagline fade-in">I'm exploring new opportunities in engineering leadership — streaming, AI infrastructure, and platform engineering. Let's talk.</p>
+      <div class="contact-cards fade-in">
+        <a href="mailto:JonathanDavidJohnson@protonmail.com" class="contact-card">✉ Email</a>
+        <a href="https://www.linkedin.com/in/jonathan-david-johnson" target="_blank" rel="noopener" class="contact-card">in LinkedIn</a>
+      </div>
+    </div>
+  </div>
 
   <footer>
     Built with HTML &amp; Catppuccin Latte · Durham, NC
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
