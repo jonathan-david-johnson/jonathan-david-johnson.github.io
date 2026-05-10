@@ -403,6 +403,65 @@
       background: rgba(114, 135, 253, 0.08);
     }
 
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--mantle);
+      border: 1.5px solid var(--crust);
+      border-top: 4px solid var(--sapphire);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 8px 32px rgba(76, 79, 105, 0.1);
+      transform: translateY(-2px);
+      color: inherit;
+    }
+
+    .project-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--subtext1);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lang-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #f05138;
+      flex-shrink: 0;
+    }
+
+    .lang-label {
+      font-size: 0.8rem;
+      color: var(--subtext0);
+    }
+
     /* ── CONTACT ── */
     #contact .section-wrap {
       text-align: center;
@@ -476,6 +535,7 @@
   <nav>
     <span class="nav-logo">&lt; Jonathan Johnson /&gt;</span>
     <ul>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -506,6 +566,43 @@
       </div>
     </div>
   </section>
+
+  <!-- PROJECTS -->
+  <div id="projects">
+    <div class="section-wrap">
+      <h2 class="section-heading fade-in">Open <span>Source</span></h2>
+      <div class="projects-grid">
+
+        <a href="https://github.com/jonathan-david-johnson/KCRW-Menu-Bar-App" target="_blank" rel="noopener" class="project-card fade-in">
+          <span class="project-name">KCRW-Menu-Bar-App</span>
+          <p class="project-desc">macOS menu bar app for streaming KCRW, the LA public radio station.</p>
+          <div class="project-footer">
+            <span class="lang-dot"></span>
+            <span class="lang-label">Swift</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/jonathan-david-johnson/StreamPlayer_iOS" target="_blank" rel="noopener" class="project-card fade-in">
+          <span class="project-name">StreamPlayer_iOS</span>
+          <p class="project-desc">Lightweight iOS audio streaming player built in Swift.</p>
+          <div class="project-footer">
+            <span class="lang-dot"></span>
+            <span class="lang-label">Swift</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/jonathan-david-johnson/PocketRadio" target="_blank" rel="noopener" class="project-card fade-in">
+          <span class="project-name">PocketRadio</span>
+          <p class="project-desc">Public radio streaming + podcast player with donation nudges. Fork of Pocket Casts iOS.</p>
+          <div class="project-footer">
+            <span class="lang-dot"></span>
+            <span class="lang-label">Swift</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
 
   <!-- EXPERIENCE -->
   <div id="experience">
