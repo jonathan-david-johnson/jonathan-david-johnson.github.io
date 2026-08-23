@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Tools — Jonathan Johnson</title>
+  <meta name="description" content="Agent skills and Pi extensions built by Jonathan Johnson — meta-repo, choose-model, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <noscript><style>.fade-in { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="tools.html" class="current">My Tools</a></li>
+      <li><a href="pocketradio.html">PocketRadio</a></li>
+    </ul>
+  </nav>
+
+  <div id="tools">
+    <div class="section-wrap first">
+      <h2 class="section-heading tight fade-in">My <span>Tools</span></h2>
+      <p class="pr-lede fade-in">Agent skills and extensions I wrote to make agentic development repeatable instead of vibes. Some are tied to my harness; most are plain markdown that works anywhere.</p>
+
+      <!-- ── PI ── -->
+      <div class="tool-group">
+        <div class="tool-group-head fade-in">
+          <h3>Built for <span>Pi</span></h3>
+          <p><a href="https://pi.dev" target="_blank" rel="noopener">Pi</a> is the coding agent I run day to day — an open, locally-configured harness installed as <code>@earendil-works/pi-coding-agent</code>. My entire config is a git repo, so the agent I use is versioned, reviewable, and reproducible on a new machine with one clone.</p>
+          <p>I use it because it gives me much tighter control than Claude Code or Codex. I choose the model per task rather than accepting a default, extend the agent itself in TypeScript, and decide exactly which skills load into context instead of paying for a fixed bundle. When I want different behavior, I write an extension — I'm not waiting on someone's roadmap.</p>
+        </div>
+
+        <div class="tool-list">
+
+          <div class="tool-card fade-in">
+            <div class="tool-head">
+              <span class="tool-name">choose-model</span>
+              <span class="tool-kind">Skill + extension · Python</span>
+            </div>
+            <p class="tool-what">Pick the right model for the job, with receipts.</p>
+            <p class="tool-desc">Recommends a model for a given prompt from a persistent registry of costs, capabilities, and measured results — then lets you prove the recommendation. Evaluation is staged so scoring stays honest: fan out, test, score, record. Ships with a Pi extension (<code>choose-model.ts</code>) that exposes it as a slash command inside the agent.</p>
+            <ul class="tool-bullets">
+              <li><code>run</code> fans one prompt out to multiple models in isolated per-run git clones and writes a session manifest — no registry write yet.</li>
+              <li><code>set-score</code> adjusts after hands-on testing; <code>record</code> commits the result to the registry.</li>
+              <li>Recorded runs keep the actual model output, so every score in the registry is auditable.</li>
+              <li>Pi-specific: the registry maps models to harnesses and the extension talks to Pi's model API directly.</li>
+            </ul>
+            <a href="https://github.com/jonathan-david-johnson/choose-model" target="_blank" rel="noopener" class="tool-link">View on GitHub →</a>
+          </div>
+
+          <div class="tool-card fade-in">
+            <div class="tool-head">
+              <span class="tool-name">pi extensions</span>
+              <span class="tool-kind">TypeScript</span>
+            </div>
+            <p class="tool-what">Changing what the agent does, not just what it's told.</p>
+            <p class="tool-desc">Pi lets you register commands, tools, and UI directly in the harness. These are the ones I run every day — the reason I'd rather extend an open agent than work around a closed one.</p>
+            <ul class="tool-bullets">
+              <li><code>skill-manager</code> — searchable list of every skill, toggle what loads into context instead of paying for all of it.</li>
+              <li><code>model-thinking-picker</code> — switch model and reasoning level mid-session, per task.</li>
+              <li><code>subagent</code> — fan work out to isolated sub-agents, the same pattern the milestones use.</li>
+              <li><code>btw</code> — spawn a side conversation in a subprocess so a tangent doesn't pollute the main context.</li>
+              <li><code>security-guard</code> — intercepts destructive file and directory operations before they run.</li>
+              <li><code>caveman</code>, <code>ocr</code> — terse output mode, and image OCR via tesseract.</li>
+            </ul>
+            <a href="https://github.com/jonathan-david-johnson/dotfiles/tree/main/.pi/agent/extensions" target="_blank" rel="noopener" class="tool-link">View on GitHub →</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── GENERIC ── -->
+      <div class="tool-group">
+        <div class="tool-group-head fade-in">
+          <h3>Harness-agnostic <span>skills</span></h3>
+          <p>These are just markdown with a frontmatter description and a body of instructions. No harness API, no runtime — they work in Pi, Claude Code, or anything else that reads a skill file. Portability is the point: the workflow shouldn't die when I switch agents.</p>
+        </div>
+
+        <div class="tool-list">
+
+          <div class="tool-card fade-in">
+            <div class="tool-head">
+              <span class="tool-name">meta-repo</span>
+              <span class="tool-kind">Agent skill</span>
+            </div>
+            <p class="tool-what">One product, many platforms, no monorepo.</p>
+            <p class="tool-desc">Scaffolds and extends a "monorepo shell": a top-level <code>Makefile</code> that delegates to per-platform nested git repos, with a <code>docs/&lt;platform&gt;/</code> layout for milestones, bugs, and ADRs. Gives every agent the same map of the project no matter which platform it picks up.</p>
+            <ul class="tool-bullets">
+              <li>Sets up a new platform, scaffolds its docs tree, and wires it into the top-level delegation targets.</li>
+              <li>Enforces the milestone and bug-doc conventions that planning agents read before writing code.</li>
+              <li>Same pattern I used to unify 30+ microservice repos at Disney — and the backbone of <a href="pocketradio.html">PocketRadio</a>.</li>
+            </ul>
+            <a href="https://github.com/jonathan-david-johnson/dotfiles/tree/main/.pi/agent/skills/meta-repo" target="_blank" rel="noopener" class="tool-link">View on GitHub →</a>
+          </div>
+
+          <div class="tool-card fade-in">
+            <div class="tool-head">
+              <span class="tool-name">self-review</span>
+              <span class="tool-kind">Agent skill</span>
+            </div>
+            <p class="tool-what">Make the agent grade its own last run.</p>
+            <p class="tool-desc">Reviews the last prompt, or a span of recent interactions, and extracts what actually went wrong into concrete improvements. The feedback loop that turns a bad session into a better skill file instead of a shrug.</p>
+            <ul class="tool-bullets">
+              <li>Triggered by "review last run", "what went wrong", "lessons learned".</li>
+              <li>Produces actionable changes, not a postmortem essay.</li>
+            </ul>
+            <a href="https://github.com/jonathan-david-johnson/dotfiles/tree/main/.pi/agent/skills/self-review" target="_blank" rel="noopener" class="tool-link">View on GitHub →</a>
+          </div>
+
+          <div class="tool-card fade-in">
+            <div class="tool-head">
+              <span class="tool-name">html-doc</span>
+              <span class="tool-kind">Agent skill</span>
+            </div>
+            <p class="tool-what">Markdown in, presentable HTML out.</p>
+            <p class="tool-desc">Converts any markdown document into two self-contained HTML views: a slide deck and a vertical-scroll page with sticky nav. A pure mechanical transform — it renders, it doesn't rewrite or editorialize.</p>
+            <ul class="tool-bullets">
+              <li>Turns a design doc into something you can present without rebuilding it in slides.</li>
+              <li>Self-contained output — no build step, no external assets.</li>
+            </ul>
+            <a href="https://github.com/jonathan-david-johnson/dotfiles/tree/main/.pi/agent/skills/html-doc" target="_blank" rel="noopener" class="tool-link">View on GitHub →</a>
+          </div>
+
+          <div class="tool-card fade-in">
+            <div class="tool-head">
+              <span class="tool-name">youtube-transcript</span>
+              <span class="tool-kind">Agent skill</span>
+            </div>
+            <p class="tool-what">Clean, timestamped transcripts, no API key.</p>
+            <p class="tool-desc">Pulls a readable timestamped transcript out of a YouTube video using <code>yt-dlp</code>. Useful for turning a conference talk into something an agent can actually search and cite.</p>
+            <ul class="tool-bullets">
+              <li>No API keys and no quota to manage.</li>
+              <li>Output is clean enough to feed straight into a summarization pass.</li>
+            </ul>
+            <a href="https://github.com/jonathan-david-johnson/dotfiles/tree/main/.pi/agent/skills/youtube-transcript" target="_blank" rel="noopener" class="tool-link">View on GitHub →</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <a href="index.html">← Back home</a> · Durham, NC
+  </footer>
+
+  <script src="assets/site.js"></script>
+
+</body>
+</html>

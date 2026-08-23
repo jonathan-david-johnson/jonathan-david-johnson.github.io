@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PocketRadio — Jonathan Johnson</title>
+  <meta name="description" content="PocketRadio — a public radio streaming and podcast app running on five native surfaces, built through coding agents." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <noscript><style>.fade-in { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="tools.html">My Tools</a></li>
+      <li><a href="pocketradio.html" class="current">PocketRadio</a></li>
+    </ul>
+  </nav>
+
+  <!-- POCKETRADIO -->
+  <div id="pocketradio">
+    <div class="section-wrap first wide">
+      <h2 class="section-heading tight fade-in">PocketRadio — <span>Built by agents, planned by me</span></h2>
+      <p class="pr-lede fade-in">I forked Pocket Casts iOS and, working fully through coding agents, turned it into PocketRadio — a public-radio streaming + podcast app running natively on five surfaces, with two more planned. A meta-repo shell, docs-driven milestones, and planning agents that grill the plan before any code is written.</p>
+
+      <div class="pr-stat-row fade-in">
+        <div class="pr-stat"><span class="num">5</span><span class="lbl">Shipping surfaces</span></div>
+        <div class="pr-stat"><span class="num">61</span><span class="lbl">Milestone docs</span></div>
+        <div class="pr-stat"><span class="num">4</span><span class="lbl">Languages</span></div>
+      </div>
+
+      <div class="pr-process">
+        <div class="pr-step fade-in">
+          <h3>Meta-repo architecture</h3>
+          <p>One product, five nested git repos under a shared shell. A single top-level <code>Makefile</code> delegates to each platform — checkout, status, build, test, run, deploy — so any agent can pick up any platform independently. The same discipline that unified 30+ microservices during my time at Disney.</p>
+        </div>
+        <div class="pr-step fade-in">
+          <h3>Docs-driven milestones</h3>
+          <p>Every platform keeps <code>docs/&lt;platform&gt;/milestones/milestone_N.md</code>, pointed at by a <code>current_milestone.md</code> symlink. Each milestone is written <em>before</em> code: a plain-language goal, a user-verifiable checkpoint, explicit scope, and a <code>Behaviors to test</code> list.</p>
+        </div>
+        <div class="pr-step fade-in">
+          <h3>Planning agents, then fan-out</h3>
+          <p>Milestones start as a grilling session — my planning skill, built on <a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">Matt Pocock's grill-me</a>, interviews the plan branch-by-branch until decisions resolve. Then each behavior in the list fans out to its own sub-agent.</p>
+        </div>
+      </div>
+
+      <div class="pr-platforms">
+        <a href="https://github.com/jonathan-david-johnson/pocket-radio-ios" target="_blank" rel="noopener" class="pr-platform fade-in">
+          <div class="pf-head"><span class="pf-name">iOS</span><span class="pf-lang">Swift</span></div>
+          <p class="pf-desc">Fork of Pocket Casts iOS — live radio, podcast Up Next, and donation nudges, plus synced lyrics with per-station offset tuning. My daily driver.</p>
+          <span class="pf-milestones">M1–M11.7 · <span class="pf-status">shipping</span></span>
+        </a>
+        <a href="https://github.com/jonathan-david-johnson/pocket-radio-ios" target="_blank" rel="noopener" class="pr-platform fade-in">
+          <div class="pf-head"><span class="pf-name">Apple CarPlay</span><span class="pf-lang">Swift</span></div>
+          <p class="pf-desc">Ships inside the iOS app rather than as its own repo — radio and Up Next on the car head unit, remote play included.</p>
+          <span class="pf-milestones">in <code>pocket-radio-ios</code> · <span class="pf-status">shipping</span></span>
+        </a>
+        <a href="https://github.com/jonathan-david-johnson/pocket-radio-menubar" target="_blank" rel="noopener" class="pr-platform fade-in">
+          <div class="pf-head"><span class="pf-name">macOS menubar</span><span class="pf-lang">SwiftUI</span></div>
+          <p class="pf-desc">NSStatusItem + NSPopover player — Pocket Casts login, Up Next, radio favorites, tracklists and lyrics from the menu bar. Canonical spec for the Pocket Casts API every other surface ports from.</p>
+          <span class="pf-milestones">M1–M9 · <span class="pf-status">shipping</span></span>
+        </a>
+        <a href="https://github.com/jonathan-david-johnson/pocket-radio-roku" target="_blank" rel="noopener" class="pr-platform fade-in">
+          <div class="pf-head"><span class="pf-name">Roku</span><span class="pf-lang">BrightScript</span></div>
+          <p class="pf-desc">PocketStreams channel — Pocket Casts Up Next plus favorite radio streams on the big screen. Implemented, still buggy.</p>
+          <span class="pf-milestones">M1–M11 · <span class="pf-status">implemented</span></span>
+        </a>
+        <a href="https://github.com/jonathan-david-johnson/pocket-radio-console" target="_blank" rel="noopener" class="pr-platform fade-in">
+          <div class="pf-head"><span class="pf-name">Terminal</span><span class="pf-lang">Go</span></div>
+          <p class="pf-desc">TUI companion — Bubbletea + mpv. Playback and radio work; Up Next is still in progress.</p>
+          <span class="pf-milestones">M0–M6 · <span class="pf-status">in progress</span></span>
+        </a>
+        <div class="pr-platform planned fade-in">
+          <div class="pf-head"><span class="pf-name">Web</span><span class="pf-lang">TS / React</span></div>
+          <p class="pf-desc">Planned. M1 is a docs-only auth spike: how a browser client reaches Supabase without holding the <code>x-user-uuid</code> secret an iOS build can keep.</p>
+          <span class="pf-milestones">M1 · <span class="pf-status">docs only</span></span>
+        </div>
+        <div class="pr-platform planned fade-in">
+          <div class="pf-head"><span class="pf-name">Android</span><span class="pf-lang">Kotlin</span></div>
+          <p class="pf-desc">Planned — Android TV and mobile. M0/M1 written, no code scaffolded yet.</p>
+          <span class="pf-milestones">M0–M1 · <span class="pf-status">docs only</span></span>
+        </div>
+      </div>
+
+      <div class="pr-remote fade-in">
+        <h3>Remote play — the cross-platform milestone</h3>
+        <p>Like Spotify Connect: keep listening on one device, control it from another, even across different networks. Devices announce themselves on a Supabase Realtime channel scoped to your Pocket Casts account and exchange <code>play</code> / <code>pause</code> / <code>stop</code> / <code>load_station</code> commands. No pairing step, nothing to configure — anything signed into the same account finds everything else.</p>
+        <p>Live between iOS (and CarPlay) and the macOS menubar today, currently one-directional: iOS sends, menubar executes. Bidirectional control, a device picker, and "Playing on {device}" indicators are the active <code>docs/global/</code> milestone. Wire formats are pinned as JSON contract fixtures in <code>contracts/remote/</code> so each platform's agent codes against the same spec instead of the other app's source.</p>
+      </div>
+
+      <div class="pr-anatomy fade-in">
+        <h3>One shell, many repos — the meta-repo anatomy</h3>
+<pre>project/
+├── Makefile                  # top-level: branch admin + delegation only
+├── AGENTS.md                 # repo map + conventions (for AI agents)
+├── CLAUDE.md                 # one line: @AGENTS.md — enforced by .githooks/
+├── contracts/remote/         # JSON fixtures pinning the remote-play wire format
+├── docs/
+│   ├── REPO_STRUCTURE.md     # the convention, documented
+│   ├── global/   …           # cross-platform milestones (remote play)
+│   ├── ios/
+│   │   ├── current_milestone.md → milestones/milestone_11.6.md
+│   │   └── milestones/       # M1 … M11.7 + sub-milestones
+│   ├── menubar/  …           # M1–M9
+│   ├── roku/     …           # M1–M11
+│   ├── console/  …           # M0–M6 + ADRs
+│   ├── android/  …           # M0–M1 (planned)
+│   └── web/      …           # M1: auth spike (planned)
+├── supabase/                 # shared backend: migrations + pc-relay function
+├── pocket-radio-ios/         # nested git repo (Swift, incl. CarPlay)
+├── pocket-radio-menubar/     # nested git repo (Swift / SwiftUI)
+├── pocket-radio-roku/        # nested git repo (BrightScript)
+└── pocket-radio-console/     # nested git repo (Go)</pre>
+      </div>
+
+      <div class="pr-links fade-in">
+        <a href="https://github.com/jonathan-david-johnson/PocketRadio" target="_blank" rel="noopener" class="btn btn-primary">View PocketRadio</a>
+      </div>
+      <p class="pr-license fade-in">MPL 2.0 — inherited from upstream on the iOS fork, matched voluntarily on the original apps. The <code>NOTICE</code> asks forks to keep the station donation links reachable; a request, not a license condition.</p>
+    </div>
+  </div>
+
+  <footer>
+    <a href="index.html">← Back home</a> · Durham, NC
+  </footer>
+
+  <script src="assets/site.js"></script>
+
+</body>
+</html>
